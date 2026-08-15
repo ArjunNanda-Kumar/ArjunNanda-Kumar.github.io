@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Reveal from "../../components/Reveal.tsx";
+---
+
+<BaseLayout title="Agricultural Lab Work">
+  <section class="section container page-hero">
+    <Reveal client:visible>
+      <p class="eyebrow">Current Work</p>
+      <h1>Agricultural Lab Work</h1>
+      <p class="lede">
+        Ongoing work applying robotics and sensing to agricultural
+        applications.
+      </p>
+    </Reveal>
+  </section>
+
+  <section class="section container">
+    <Reveal client:visible>
+      <h2>Overview</h2>
+      <p>
+        Write about the agricultural lab project: the goal, the hardware or
+        sensing systems involved, and current progress.
+      </p>
+    </Reveal>
+  </section>
+
+  <section class="section container">
+    <Reveal client:visible>
+      <h2>Media</h2>
+      <p>Add photos or video of the work here as it progresses.</p>
+    </Reveal>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: 64px;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    color: var(--accent);
+  }
+
+  .lede {
+    max-width: 640px;
+    font-size: 1.1rem;
+  }
+</style>

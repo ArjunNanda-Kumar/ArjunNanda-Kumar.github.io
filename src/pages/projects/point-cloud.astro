@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Reveal from "../../components/Reveal.tsx";
+import ModelViewer from "../../components/ModelViewer.tsx";
+---
+
+<BaseLayout title="3D Modeling & Point Clouds">
+  <section class="section container page-hero">
+    <Reveal client:visible>
+      <p class="eyebrow">CAD · Scanning</p>
+      <h1>3D Modeling & Point Clouds</h1>
+      <p class="lede">
+        CAD and 3D modeling work, including interactive point cloud captures
+        you can rotate and explore directly below.
+      </p>
+    </Reveal>
+  </section>
+
+  <section class="section container">
+    <Reveal client:visible>
+      <h2>Interactive model</h2>
+      <p>
+        Drag to rotate, scroll to zoom. Replace <code>/public/models/sample.glb</code>
+        with your own exported model (see note below on converting point
+        clouds).
+      </p>
+    </Reveal>
+    <Reveal client:visible delay={0.1}>
+      <ModelViewer client:visible src="/models/sample.glb" />
+    </Reveal>
+  </section>
+
+  <section class="section container">
+    <Reveal client:visible>
+      <h2>Overview</h2>
+      <p>
+        Write about the 3D modeling process, tools used (CAD software,
+        scanning setup), and what the point cloud represents.
+      </p>
+    </Reveal>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: 64px;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    color: var(--accent);
+  }
+
+  .lede {
+    max-width: 640px;
+    font-size: 1.1rem;
+  }
+
+  code {
+    background: var(--bg-elevated);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+</style>

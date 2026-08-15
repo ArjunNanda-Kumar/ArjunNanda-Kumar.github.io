@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Reveal from "../../components/Reveal.tsx";
+---
+
+<BaseLayout title="Perception Model">
+  <section class="section container page-hero">
+    <Reveal client:visible>
+      <p class="eyebrow">HORC Lab</p>
+      <h1>Perception Model</h1>
+      <p class="lede">
+        Sensing and perception work on the Agility Digit humanoid robot,
+        focused on real-time lidar and camera data streaming.
+      </p>
+    </Reveal>
+  </section>
+
+  <section class="section container">
+    <Reveal client:visible>
+      <h2>Overview</h2>
+      <p>
+        Write a few paragraphs here about the perception model: what problem
+        it solves, the data pipeline (lidar + camera over TCP/WebSockets),
+        and the throughput bottleneck you diagnosed and fixed with a
+        restructured drain-loop approach.
+      </p>
+    </Reveal>
+  </section>
+
+  <section class="section container">
+    <Reveal client:visible>
+      <h2>Media</h2>
+      <p>Add photos or a demo video of the perception system in action.</p>
+      <!-- Example video embed once you add a file to /public/videos -->
+      <!-- <video src="/videos/perception-demo.mp4" controls></video> -->
+    </Reveal>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: 64px;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    color: var(--accent);
+  }
+
+  .lede {
+    max-width: 640px;
+    font-size: 1.1rem;
+  }
+</style>

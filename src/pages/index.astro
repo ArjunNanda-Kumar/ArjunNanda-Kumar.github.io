@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Reveal from "../components/Reveal.tsx";
+
+const projects = [
+  {
+    href: "/projects/perception",
+    title: "Perception Model",
+    blurb:
+      "Sensing and perception work on the Agility Digit humanoid robot at the HORC Lab — lidar and camera data pipelines, throughput optimization, and real-time streaming.",
+  },
+  {
+    href: "/projects/point-cloud",
+    title: "3D Modeling & Point Clouds",
+    blurb:
+      "CAD and 3D modeling work, including interactive point cloud captures you can rotate and explore directly in the browser.",
+  },
+  {
+    href: "/projects/agriculture",
+    title: "Agricultural Lab Work",
+    blurb:
+      "Ongoing work applying robotics and sensing to agricultural applications.",
+  },
+];
+---
+
+<BaseLayout title="Home">
+  <section class="hero container">
+    <Reveal client:visible>
+      <p class="eyebrow">Robotics · Perception · 3D Modeling</p>
+      <h1>Hi, I'm Arjun <span class="accent">Nanda Kumar</span>.</h1>
+      <p class="lede">
+        Mechanical engineer turned robotics researcher. Currently pursuing my
+        MS in Robotics at the University of Delaware and working in the HORC
+        (Human-Oriented Robotics and Control) Lab, focused on perception and
+        sensing for humanoid robots — alongside 3D modeling and agricultural
+        robotics work.
+      </p>
+      <div class="hero-actions">
+        <a href="/projects/perception" class="btn">View my work</a>
+      </div>
+    </Reveal>
+  </section>
+
+  <section class="section container">
+    <Reveal client:visible>
+      <h2>What I'm working on</h2>
+    </Reveal>
+    <div class="grid">
+      {projects.map((project, i) => (
+        <Reveal client:visible delay={i * 0.1}>
+          <a href={project.href} class="card project-card">
+            <h3>{project.title}</h3>
+            <p>{project.blurb}</p>
+            <span class="read-more">Read more &rarr;</span>
+          </a>
+        </Reveal>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 140px 24px 96px;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .lede {
+    max-width: 640px;
+    font-size: 1.1rem;
+  }
+
+  .hero-actions {
+    margin-top: 32px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .project-card {
+    text-decoration: none;
+    display: block;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-dim);
+  }
+
+  .project-card h3 {
+    margin-top: 0;
+    color: var(--text);
+  }
+
+  .read-more {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+</style>

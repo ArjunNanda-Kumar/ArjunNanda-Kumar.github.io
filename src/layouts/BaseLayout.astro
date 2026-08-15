@@ -1,0 +1,42 @@
+---
+import Nav from "../components/Nav.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Robotics, perception, and 3D modeling portfolio." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} · Arjun Nanda Kumar</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <footer class="container">
+      <p>&copy; {new Date().getFullYear()} Arjun Nanda Kumar</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  footer {
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 0.85rem;
+  }
+</style>
