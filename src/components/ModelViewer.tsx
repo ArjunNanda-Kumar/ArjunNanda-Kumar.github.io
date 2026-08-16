@@ -58,7 +58,7 @@ export default function ModelViewer({ src, height = 480 }: ModelViewerProps) {
   return (
     <div style={{ height, borderRadius: 12, overflow: "hidden", border: "1px solid var(--border)" }}>
       <Canvas
-        camera={{ position: [3, 2, 3], fov: 45 }}
+        camera={{ position: [2, 1.3, 2], fov: 40 }}
         onError={() => setFailed(true)}
       >
         <Suspense fallback={<Loader />}>
