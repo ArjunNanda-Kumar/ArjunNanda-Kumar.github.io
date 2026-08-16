@@ -23,7 +23,7 @@ export default function ScrollBackground() {
     canvas.width = width;
     canvas.height = height;
 
-    const particleCount = width < 700 ? 55 : 120;
+    const particleCount = width < 700 ? 70 : 160;
     const particles: Particle[] = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -50,10 +50,10 @@ export default function ScrollBackground() {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
-      const scrollOffset = scrollRef.current * 0.04;
+      const scrollOffset = scrollRef.current * 0.12;
 
-      // grid lines, drifting slowly with scroll
-      ctx.strokeStyle = "rgba(94, 234, 212, 0.05)";
+      // grid lines, drifting with scroll
+      ctx.strokeStyle = "rgba(94, 234, 212, 0.09)";
       ctx.lineWidth = 1;
       const spacing = 64;
       const gridShift = scrollOffset % spacing;
@@ -79,16 +79,16 @@ export default function ScrollBackground() {
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
 
-        const parallaxY = (p.y + scrollOffset * p.z * 0.5) % height;
-        const radius = p.z * 1.8;
+        const parallaxY = ((p.y + scrollOffset * p.z * 1.4) % (height + 100) + height + 100) % (height + 100);
+        const radius = p.z * 2.4;
         ctx.beginPath();
         ctx.arc(p.x, parallaxY, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(94, 234, 212, ${0.15 + p.z * 0.2})`;
+        ctx.fillStyle = `rgba(94, 234, 212, ${0.25 + p.z * 0.35})`;
         ctx.fill();
       });
 
       // connect nearby particles
-      ctx.strokeStyle = "rgba(94, 234, 212, 0.06)";
+      ctx.strokeStyle = "rgba(94, 234, 212, 0.1)";
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const a = particles[i];
