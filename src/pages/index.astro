@@ -1,14 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Reveal from "../components/Reveal.tsx";
-import Journey from "../components/Journey.tsx";
-import WorkGrid from "../components/WorkGrid.tsx";
-import Magnetic from "../components/Magnetic.tsx";
+import ModelViewer from "../components/ModelViewer.tsx";
+
+const work = [
+  {
+    tag: "HORC Lab",
+    title: "Perception on Agility Digit",
+    desc: "Working on the perception and sensing layer for the lab's Agility Digit humanoid.",
+  },
+  {
+    tag: "HORC Lab",
+    title: "Lidar streaming bottleneck",
+    desc: "Diagnosed a frame-rate cap in a ROS2 node streaming lidar and camera data over TCP/WebSockets — traced it to the state machine, buffer size, and ack-based flow control, then proposed a restructured drain-loop fix.",
+  },
+  {
+    tag: "Robotics course",
+    title: "IMU pipeline on Raspberry Pi",
+    desc: "Full sensor-to-analysis pipeline on a Pi Zero 2W — a ROS2 node processing live IMU data, logged to CSV and plotted with pandas and matplotlib.",
+  },
+];
 ---
 
 <BaseLayout title="Home">
   <section class="hero container">
-    <div class="blob"></div>
     <Reveal client:load>
       <p class="eyebrow">Mechanical engineer &rarr; robotics MS &middot; University of Delaware</p>
       <h1>Engineering things that <span class="accent">sense, move, and hold together.</span></h1>
@@ -18,46 +33,10 @@ import Magnetic from "../components/Magnetic.tsx";
         the Agility Digit humanoid in the HORC Lab.
       </p>
       <div class="hero-actions">
-        <Magnetic client:load href="#work" className="btn" cursorLabel="explore">View the work</Magnetic>
-        <Magnetic client:load href="#contact" className="btn btn-ghost" cursorLabel="say hi">Get in touch</Magnetic>
+        <a href="#work" class="btn">View the work</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
     </Reveal>
-  </section>
-
-  <section id="about" class="section container">
-    <Reveal client:visible>
-      <p class="eyebrow">About</p>
-      <h2>From mechanisms to humanoids</h2>
-      <p class="body-text">
-        I started out as a mechanical engineer, then got pulled into
-        building and innovating — which led to a stint as an Entrepreneur
-        in Residence at IIT Palakkad, working on assistive robotic tech.
-        That took me deeper into robotics than any single ME course
-        could, so I'm now doing a robotics MS at the University of
-        Delaware, going back to the fundamentals — ROS2, Linux, networked
-        systems.
-      </p>
-      <p class="body-text">
-        In the HORC (Human-Oriented Robotics and Control) Lab, I work on
-        perception and sensing for the Agility Digit humanoid. Outside of
-        coursework and lab work, I still like building physical things —
-        3D printing and general hardware tinkering.
-      </p>
-    </Reveal>
-  </section>
-
-  <section id="gallery" class="section container">
-    <Reveal client:visible>
-      <img src="/images/lab-photo-1.jpg" alt="Arjun in the lab" class="mid-photo" />
-    </Reveal>
-  </section>
-
-  <section id="journey" class="section container">
-    <Reveal client:visible>
-      <p class="eyebrow">Journey</p>
-      <h2>How I got here</h2>
-    </Reveal>
-    <Journey client:visible />
   </section>
 
   <section id="work" class="section container">
@@ -65,34 +44,43 @@ import Magnetic from "../components/Magnetic.tsx";
       <p class="eyebrow">Work</p>
       <h2>Selected work</h2>
     </Reveal>
-    <Reveal client:visible delay={0.1}>
-      <WorkGrid client:visible />
-    </Reveal>
+    <div class="work-grid">
+      {work.map((item, i) => (
+        <Reveal client:visible delay={i * 0.08}>
+          <div class="card">
+            <span class="tag">{item.tag}</span>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  </section>
 
-    <Reveal client:visible delay={0.15}>
-      <div class="project-links">
-        <a href="/projects/perception" class="btn btn-ghost">Perception model &rarr;</a>
-        <a href="/projects/point-cloud" class="btn btn-ghost">3D / point cloud &rarr;</a>
-        <a href="/projects/agriculture" class="btn btn-ghost">Agricultural lab &rarr;</a>
-      </div>
+  <section id="pointcloud" class="section container">
+    <Reveal client:visible>
+      <p class="eyebrow">Lidar Scan</p>
+      <h2>A real point cloud from the lab</h2>
+      <p class="section-sub">Captured from the Agility Digit's lidar. Drag to rotate, scroll to zoom.</p>
+    </Reveal>
+    <Reveal client:visible delay={0.1}>
+      <ModelViewer client:visible src="/models/lidar-scan.glb" />
     </Reveal>
   </section>
 
-  <section id="media" class="section container">
+  <section id="photo" class="section container">
+    <Reveal client:visible>
+      <img src="/images/lab-photo-1.jpg" alt="Arjun in the lab" class="mid-photo" />
+    </Reveal>
+  </section>
+
+  <section id="video" class="section container">
     <Reveal client:visible>
       <p class="eyebrow">From the Lab</p>
       <h2>A look at the work</h2>
     </Reveal>
     <Reveal client:visible delay={0.1}>
-      <video
-        src="/videos/lab-demo.webm"
-        autoplay
-        muted
-        loop
-        playsinline
-        controls
-        class="media-video"
-      ></video>
+      <video src="/videos/lab-demo.webm" autoplay muted loop playsinline controls class="media-video"></video>
     </Reveal>
   </section>
 
@@ -105,35 +93,29 @@ import Magnetic from "../components/Magnetic.tsx";
 </BaseLayout>
 
 <style>
-  .hero { padding: 140px 24px 60px; position: relative; overflow: hidden; }
-  .blob {
-    position: absolute; width: 560px; height: 560px; border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(94,234,212,0.2), rgba(94,234,212,0.05) 60%, transparent 75%);
-    filter: blur(20px); pointer-events: none; z-index: 0;
-    top: -180px; right: -140px;
-  }
-  .hero > :global(div) { position: relative; z-index: 1; }
-  .eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; color: var(--accent); margin-bottom: 12px; }
-  h1 { max-width: 780px; }
-  .lede { max-width: 620px; font-size: 1.1rem; margin-top: 20px; }
-  .hero-actions { margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap; }
-  .btn-ghost { background: transparent; border-color: var(--border); color: var(--text); }
-  .btn-ghost:hover { border-color: var(--accent); background: transparent; color: var(--accent); transform: translateY(-2px); }
+  .hero { padding: 130px 24px 70px; }
+  .lede { max-width: 620px; font-size: 1.08rem; margin-top: 18px; display: block; }
+  .hero-actions { margin-top: 30px; display: flex; gap: 16px; flex-wrap: wrap; }
 
-  .body-text { max-width: 720px; font-size: 1.02rem; margin-top: 20px; }
+  .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 28px; }
+  @media (max-width: 860px) { .work-grid { grid-template-columns: 1fr; } }
+  .tag {
+    font-family: monospace; font-size: 11px; color: var(--accent);
+    background: rgba(94,234,212,0.08); padding: 4px 10px; border-radius: 100px;
+    display: inline-block; margin-bottom: 14px;
+  }
+  .work-grid h3 { font-size: 17px; margin-bottom: 8px; }
+  .work-grid p { font-size: 13.5px; }
+
+  .section-sub { color: var(--text-dim); font-size: 15px; max-width: 560px; margin-top: 8px; display: block; }
 
   .mid-photo {
-    width: 100%; max-height: 560px; object-fit: cover;
+    width: 100%; max-height: 520px; object-fit: cover;
     border-radius: 16px; border: 1px solid var(--border);
-    display: block;
   }
 
-  .section-sub { color: var(--text-dim); font-size: 16px; max-width: 560px; margin-top: 10px; }
-
-  .project-links { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
-
   .media-video {
-    width: 100%; max-width: 900px; margin: 32px auto 0; border-radius: 14px;
-    border: 1px solid var(--border); display: block;
+    width: 100%; max-width: 880px; margin-top: 24px;
+    border: 1px solid var(--border);
   }
 </style>

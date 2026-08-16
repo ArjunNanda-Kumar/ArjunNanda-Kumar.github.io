@@ -1,12 +1,12 @@
 :root {
-  --bg: #06080a;
-  --bg-elevated: rgba(20, 24, 28, 0.65);
-  --text: #f2f5f7;
-  --text-dim: #93a0a8;
+  --bg: #08090b;
+  --surface: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.09);
+  --text: #f5f6f7;
+  --text-dim: #8b939c;
   --accent: #5eead4;
-  --accent-dim: #1f6e63;
-  --border: rgba(94, 234, 212, 0.14);
-  --max-width: 1100px;
+  --accent-2: #38bdf8;
+  --max-width: 1080px;
 }
 
 * {
@@ -23,6 +23,7 @@ body {
   color: var(--text);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -33,41 +34,8 @@ a {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
-}
-
-h1, h2, h3 {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-}
-
-h1 {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-}
-
-h2 {
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-}
-
-p {
-  color: var(--text-dim);
-}
-
-.accent {
-  color: var(--accent);
-}
-
-.section {
-  padding: 96px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.card {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 32px;
-  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
 }
 
 main {
@@ -75,26 +43,76 @@ main {
   z-index: 1;
 }
 
+h1, h2, h3 {
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); }
+
+p {
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.accent { color: var(--accent); }
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.section {
+  padding: 88px 0;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  backdrop-filter: blur(6px);
+}
+
 .btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 11px 22px;
   border-radius: 8px;
-  border: 1px solid var(--accent-dim);
+  border: 1px solid var(--accent);
   color: var(--accent);
   text-decoration: none;
   font-weight: 600;
-  transition: background 0.2s ease, transform 0.2s ease;
+  font-size: 0.92rem;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
 .btn:hover {
-  background: var(--accent-dim);
+  background: var(--accent);
   color: var(--bg);
   transform: translateY(-2px);
 }
 
+.btn-ghost {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
+}
+
 video, img {
   max-width: 100%;
-  border-radius: 12px;
+  border-radius: 14px;
   display: block;
 }
 

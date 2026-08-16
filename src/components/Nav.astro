@@ -2,10 +2,9 @@
 const currentPath = Astro.url.pathname;
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/projects/perception", label: "Perception Model" },
-  { href: "/projects/point-cloud", label: "3D / Point Cloud" },
-  { href: "/projects/agriculture", label: "Agricultural Lab" },
+  { href: "/#work", label: "Work" },
+  { href: "/#pointcloud", label: "Point Cloud" },
+  { href: "/#contact", label: "Contact" },
 ];
 ---
 
@@ -14,12 +13,7 @@ const links = [
     <a href="/" class="brand">Arjun Nanda Kumar</a>
     <nav>
       {links.map((link) => (
-        <a
-          href={link.href}
-          class={currentPath === link.href ? "active" : ""}
-        >
-          {link.label}
-        </a>
+        <a href={link.href}>{link.label}</a>
       ))}
     </nav>
   </div>
@@ -30,8 +24,8 @@ const links = [
     position: sticky;
     top: 0;
     z-index: 50;
-    backdrop-filter: blur(10px);
-    background: rgba(11, 13, 16, 0.75);
+    backdrop-filter: blur(12px);
+    background: rgba(8, 9, 11, 0.7);
     border-bottom: 1px solid var(--border);
   }
 
@@ -44,25 +38,24 @@ const links = [
   }
 
   .brand {
-    font-weight: 700;
+    font-weight: 650;
     text-decoration: none;
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   nav {
     display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
+    gap: 28px;
   }
 
   nav a {
     text-decoration: none;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     color: var(--text-dim);
     transition: color 0.2s ease;
   }
 
   nav a:hover {
-    color: var(--text);
+    color: var(--accent);
   }
 </style>

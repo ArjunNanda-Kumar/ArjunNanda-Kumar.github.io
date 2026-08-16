@@ -1,7 +1,6 @@
 ---
 import Nav from "../components/Nav.astro";
-import CursorFX from "../components/CursorFX.tsx";
-import ScrollBackground from "../components/ScrollBackground.tsx";
+import AuroraBackground from "../components/AuroraBackground.tsx";
 import "../styles/global.css";
 
 interface Props {
@@ -22,8 +21,7 @@ const { title, description = "Robotics, perception, and 3D modeling portfolio." 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
-    <ScrollBackground client:load />
-    <CursorFX client:load />
+    <AuroraBackground client:load />
     <Nav />
     <main>
       <slot />
@@ -36,11 +34,10 @@ const { title, description = "Robotics, perception, and 3D modeling portfolio." 
 
 <style>
   footer {
-    padding: 48px 24px;
+    padding: 40px 24px;
     text-align: center;
   }
-
   footer p {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 </style>
