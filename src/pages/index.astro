@@ -3,10 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Reveal from "../components/Reveal.tsx";
 import Journey from "../components/Journey.tsx";
 import WorkGrid from "../components/WorkGrid.tsx";
+import Magnetic from "../components/Magnetic.tsx";
 ---
 
 <BaseLayout title="Home">
   <section class="hero container">
+    <div class="blob"></div>
     <Reveal client:visible>
       <p class="eyebrow">Mechanical engineer &rarr; robotics MS &middot; University of Delaware</p>
       <h1>Engineering things that <span class="accent">sense, move, and hold together.</span></h1>
@@ -16,8 +18,8 @@ import WorkGrid from "../components/WorkGrid.tsx";
         the Agility Digit humanoid in the HORC Lab.
       </p>
       <div class="hero-actions">
-        <a href="#work" class="btn">View the work</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        <Magnetic client:load href="#work" className="btn" cursorLabel="explore">View the work</Magnetic>
+        <Magnetic client:load href="#contact" className="btn btn-ghost" cursorLabel="say hi">Get in touch</Magnetic>
       </div>
       <div class="stat-row">
         <div><div class="stat-num">4</div><div class="stat-label">Journey stages</div></div>
@@ -95,15 +97,22 @@ import WorkGrid from "../components/WorkGrid.tsx";
       <h2>Let's talk</h2>
       <p class="section-sub">Open to research collaborations, robotics projects, and internship conversations.</p>
       <div class="hero-actions">
-        <a href="mailto:you@example.com" class="btn">you@example.com</a>
-        <a href="https://www.linkedin.com/in/arjunnandakumar/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+        <Magnetic client:load href="mailto:you@example.com" className="btn">you@example.com</Magnetic>
+        <Magnetic client:load href="https://www.linkedin.com/in/arjunnandakumar/" className="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</Magnetic>
       </div>
     </Reveal>
   </section>
 </BaseLayout>
 
 <style>
-  .hero { padding: 140px 24px 60px; }
+  .hero { padding: 140px 24px 60px; position: relative; overflow: hidden; }
+  .blob {
+    position: absolute; width: 560px; height: 560px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(94,234,212,0.18), rgba(94,234,212,0.04) 60%, transparent 75%);
+    filter: blur(20px); pointer-events: none; z-index: 0;
+    top: -180px; right: -140px;
+  }
+  .hero > :global(div) { position: relative; z-index: 1; }
   .eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; color: var(--accent); margin-bottom: 12px; }
   h1 { max-width: 780px; }
   .lede { max-width: 620px; font-size: 1.1rem; margin-top: 20px; }

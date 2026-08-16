@@ -1,5 +1,6 @@
 ---
 import Nav from "../components/Nav.astro";
+import CursorFX from "../components/CursorFX.tsx";
 import "../styles/global.css";
 
 interface Props {
@@ -20,6 +21,7 @@ const { title, description = "Robotics, perception, and 3D modeling portfolio." 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
+    <CursorFX client:load />
     <Nav />
     <main>
       <slot />

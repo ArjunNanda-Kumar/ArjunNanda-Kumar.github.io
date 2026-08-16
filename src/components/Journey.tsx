@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useRef, type MouseEvent } from "react";
 
 const stages = [
   {
@@ -23,18 +24,32 @@ const stages = [
   },
 ];
 
+function onTilt(e: MouseEvent<HTMLDivElement>) {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  const px = (e.clientX - r.left) / r.width - 0.5;
+  const py = (e.clientY - r.top) / r.height - 0.5;
+  el.style.transform = `perspective(600px) rotateX(${-py * 8}deg) rotateY(${px * 8}deg) translateY(-6px)`;
+}
+function onTiltLeave(e: MouseEvent<HTMLDivElement>) {
+  e.currentTarget.style.transform = "";
+}
+
 export default function Journey() {
   return (
     <div className="journey-scroller">
       {stages.map((s, i) => (
         <motion.div
           key={s.num}
-          className="jcard"
+          className="jcard tilt"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, delay: i * 0.08 }}
-          whileHover={{ y: -6 }}
+          onMouseMove={onTilt}
+          onMouseLeave={onTiltLeave}
+          data-cursor="drag"
+          style={{ transformStyle: "preserve-3d" }}
         >
           <div className="stage-num">{s.num}</div>
           <h3>{s.title}</h3>

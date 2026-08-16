@@ -1,5 +1,16 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+function onTilt(e: MouseEvent<HTMLDivElement>) {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  const px = (e.clientX - r.left) / r.width - 0.5;
+  const py = (e.clientY - r.top) / r.height - 0.5;
+  el.style.transform = `perspective(600px) rotateX(${-py * 6}deg) rotateY(${px * 6}deg) translateY(-4px)`;
+}
+function onTiltLeave(e: MouseEvent<HTMLDivElement>) {
+  e.currentTarget.style.transform = "";
+}
 
 const items = [
   {
@@ -76,13 +87,16 @@ export default function WorkGrid() {
           {visible.map((item) => (
             <motion.div
               key={item.title}
-              className="wcard"
+              className="wcard tilt"
               layout
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.3 }}
-              whileHover={{ y: -4 }}
+              onMouseMove={onTilt}
+              onMouseLeave={onTiltLeave}
+              data-cursor="view"
+              style={{ transformStyle: "preserve-3d" }}
             >
               <span className="cat-tag">{item.tag}</span>
               <h3>{item.title}</h3>
