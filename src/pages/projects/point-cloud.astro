@@ -20,13 +20,13 @@ import ModelViewer from "../../components/ModelViewer.tsx";
     <Reveal client:visible>
       <h2>Interactive model</h2>
       <p>
-        Drag to rotate, scroll to zoom. Replace <code>/public/models/sample.glb</code>
-        with your own exported model (see note below on converting point
-        clouds).
+        Drag to rotate, scroll to zoom. This is a real frame captured from
+        the Agility Digit's lidar in the HORC Lab, colored by return
+        intensity.
       </p>
     </Reveal>
     <Reveal client:visible delay={0.1}>
-      <ModelViewer client:visible src="/models/sample.glb" />
+      <ModelViewer client:visible src="/models/lidar-scan.glb" />
     </Reveal>
   </section>
 

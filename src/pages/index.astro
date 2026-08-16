@@ -9,7 +9,7 @@ import Magnetic from "../components/Magnetic.tsx";
 <BaseLayout title="Home">
   <section class="hero container">
     <div class="blob"></div>
-    <Reveal client:visible>
+    <Reveal client:load>
       <p class="eyebrow">Mechanical engineer &rarr; robotics MS &middot; University of Delaware</p>
       <h1>Engineering things that <span class="accent">sense, move, and hold together.</span></h1>
       <p class="lede">
@@ -63,6 +63,12 @@ import Magnetic from "../components/Magnetic.tsx";
     </Reveal>
   </section>
 
+  <section id="gallery" class="section container">
+    <Reveal client:visible>
+      <img src="/images/lab-photo-1.jpg" alt="Arjun in the lab" class="mid-photo" />
+    </Reveal>
+  </section>
+
   <section id="journey" class="section container">
     <Reveal client:visible>
       <p class="eyebrow">Journey</p>
@@ -96,14 +102,17 @@ import Magnetic from "../components/Magnetic.tsx";
       <p class="eyebrow">From the Lab</p>
       <h2>A look at the work</h2>
     </Reveal>
-    <div class="media-grid">
-      <Reveal client:visible delay={0.05}>
-        <img src="/images/lab-photo-1.jpg" alt="Lab work" class="media-photo" />
-      </Reveal>
-      <Reveal client:visible delay={0.1}>
-        <video src="/videos/lab-demo.webm" controls class="media-video"></video>
-      </Reveal>
-    </div>
+    <Reveal client:visible delay={0.1}>
+      <video
+        src="/videos/lab-demo.webm"
+        autoplay
+        muted
+        loop
+        playsinline
+        controls
+        class="media-video"
+      ></video>
+    </Reveal>
   </section>
 
   <section id="contact" class="section container">
@@ -149,10 +158,14 @@ import Magnetic from "../components/Magnetic.tsx";
 
   .project-links { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
 
-  .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
-  @media (max-width: 760px) { .media-grid { grid-template-columns: 1fr; } }
-  .media-photo, .media-video {
-    width: 100%; border-radius: 14px; border: 1px solid var(--border);
+  .mid-photo {
+    width: 100%; max-height: 560px; object-fit: cover;
+    border-radius: 16px; border: 1px solid var(--border);
     display: block;
+  }
+
+  .media-video {
+    width: 100%; max-width: 900px; margin: 32px auto 0; border-radius: 14px;
+    border: 1px solid var(--border); display: block;
   }
 </style>

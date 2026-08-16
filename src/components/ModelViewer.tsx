@@ -10,6 +10,17 @@ interface ModelViewerProps {
 
 function Model({ src }: { src: string }) {
   const { scene } = useGLTF(src);
+  scene.traverse((obj) => {
+    // @ts-expect-error - runtime check for Points
+    if (obj.isPoints && obj.material) {
+      // @ts-expect-error - PointsMaterial fields
+      obj.material.size = 0.02;
+      // @ts-expect-error
+      obj.material.sizeAttenuation = true;
+      // @ts-expect-error
+      obj.material.vertexColors = true;
+    }
+  });
   return <primitive object={scene} />;
 }
 
