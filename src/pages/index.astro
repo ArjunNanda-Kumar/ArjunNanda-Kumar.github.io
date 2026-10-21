@@ -3,6 +3,29 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Reveal from "../components/Reveal.tsx";
 import ModelViewer from "../components/ModelViewer.tsx";
 
+const listings = [
+  {
+    source: "UD Mechanical Engineering",
+    text: "Listed among graduate students in the MSME program, research area: Robotics.",
+    href: "https://me.udel.edu/people/graduate-students/",
+  },
+  {
+    source: "HORC Lab",
+    text: "Robotics master's student with a bachelor's in mechanical engineering, working on the perception model for the Agility Digit humanoid robot.",
+    href: "https://horc-lab.github.io/people/",
+  },
+  {
+    source: "Ag-CyPhER Lab",
+    text: "Listed as a research assistant, MS Robotics, 2026 to present.",
+    href: "https://ag-cypher.github.io/website/",
+  },
+  {
+    source: "Horn Entrepreneurship",
+    text: "2026 Hen Hatch finalist with Agri Sky Eye, an overhead cable-driven robot for detecting and spraying weeds in high-value specialty crops on farms up to 10 acres. Finals: December 3, 2026.",
+    href: "https://horn.udel.edu/meet-the-2026-hen-hatch-finalists",
+  },
+];
+
 const work = [
   {
     tag: "HORC Lab",
@@ -64,6 +87,36 @@ const work = [
     </div>
   </section>
 
+  <section id="venture" class="section container">
+    <Reveal client:visible>
+      <p class="eyebrow">Venture</p>
+      <h2>Agri Sky Eye</h2>
+    </Reveal>
+    <Reveal client:visible delay={0.1}>
+      <div class="card venture-card">
+        <span class="badge">2026 Hen Hatch Finalist</span>
+        <p class="venture-desc">
+          An overhead robot on cables that detects weeds and sprays only the
+          selected ones in high-value specialty crops. Built for farms of up
+          to 10 acres, it aims to reduce manual weeding labor and help
+          growers manage their crops more efficiently.
+        </p>
+        <div class="venture-meta">
+          <span>Presenter: Arjun Nanda Kumar</span>
+          <span>University of Delaware, Robotics</span>
+          <span>Finals: Dec 3, 2026, Blue Hen Innovation Fest</span>
+          <span>Hen Hatch: $50,000 in cash and prizes</span>
+        </div>
+        <a
+          href="https://horn.udel.edu/meet-the-2026-hen-hatch-finalists"
+          class="btn"
+          target="_blank"
+          rel="noopener"
+        >Read the announcement &rarr;</a>
+      </div>
+    </Reveal>
+  </section>
+
   <section id="pointcloud" class="section container">
     <Reveal client:visible>
       <p class="eyebrow">Lidar Scan</p>
@@ -89,6 +142,24 @@ const work = [
     <Reveal client:visible delay={0.1}>
       <video src="/videos/lab-demo.webm" autoplay muted loop playsinline class="media-video"></video>
     </Reveal>
+  </section>
+
+  <section id="listings" class="section container">
+    <Reveal client:visible>
+      <p class="eyebrow">Find me online</p>
+      <h2>Where I'm listed</h2>
+    </Reveal>
+    <div class="listing-grid">
+      {listings.map((l, i) => (
+        <Reveal client:visible delay={i * 0.07}>
+          <a href={l.href} class="card listing" target="_blank" rel="noopener">
+            <span class="listing-src">{l.source}</span>
+            <p class="listing-text">{l.text}</p>
+            <span class="listing-go">Open page &rarr;</span>
+          </a>
+        </Reveal>
+      ))}
+    </div>
   </section>
 
   <section id="contact" class="section container">
@@ -144,6 +215,30 @@ const work = [
   }
   .work-grid h3 { font-size: 17px; margin-bottom: 8px; }
   .work-grid p { font-size: 13.5px; }
+
+  .venture-card { margin-top: 24px; max-width: 760px; }
+  .badge {
+    display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--bg); background: var(--accent);
+    padding: 5px 12px; border-radius: 100px; margin-bottom: 16px;
+  }
+  .venture-desc { font-size: 1.02rem; color: var(--text); }
+  .venture-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 24px; }
+  .venture-meta span {
+    font-size: 12px; font-family: monospace; color: var(--text-dim);
+    border: 1px solid var(--border); padding: 4px 10px; border-radius: 100px;
+  }
+
+  .listing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+  @media (max-width: 760px) { .listing-grid { grid-template-columns: 1fr; } }
+  .listing {
+    display: block; text-decoration: none; height: 100%;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .listing:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .listing-src { font-family: monospace; font-size: 12px; color: var(--accent); letter-spacing: 0.04em; }
+  .listing-text { font-size: 14px; margin: 10px 0 14px; }
+  .listing-go { font-size: 13px; font-weight: 600; color: var(--text); }
 
   .section-sub { color: var(--text-dim); font-size: 15px; max-width: 560px; margin-top: 8px; display: block; }
 
