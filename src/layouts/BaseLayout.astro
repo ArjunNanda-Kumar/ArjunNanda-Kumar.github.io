@@ -1,43 +1,47 @@
 ---
-import Nav from "../components/Nav.astro";
-import AuroraBackground from "../components/AuroraBackground.tsx";
-import "../styles/global.css";
-
+import AuroraBackground from '../components/AuroraBackground';
+import Nav from '../components/Nav.astro';
+import '../styles/global.css';
 interface Props {
-  title: string;
-  description?: string;
+title?: string;
+description?: string;
 }
-
-const { title, description = "Robotics, perception, and 3D modeling portfolio." } = Astro.props;
+const {
+title = 'Arjun Nanda Kumar — Robotics Engineer & Researcher',
+description = 'Robotics MS student at the University of Delaware working on humanoid perception (Agility Digit) at HORC Lab and precision agricultural robotics at Ag-CyPhER Lab.',
+} = Astro.props;
 ---
-
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <title>{title} · Arjun Nanda Kumar</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body>
-    <AuroraBackground client:load />
-    <Nav />
-    <main>
-      <slot />
-    </main>
-    <footer class="container">
-      <p>&copy; {new Date().getFullYear()} Arjun Nanda Kumar</p>
-    </footer>
-  </body>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+rel="stylesheet"
+/>
+</head>
+<body>
+<AuroraBackground client:load />
+<Nav />
+<main class="site-main">
+<slot />
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-left">
+<span class="mono-dim">ARJUN NANDA KUMAR</span>
+<span class="footer-sep">/</span>
+<span class="mono-dim">UNIVERSITY OF DELAWARE — MS ROBOTICS</span>
+</div>
+<div class="footer-right">
+<span class="mono-dim">HORC LAB & AG-CYPHER LAB</span>
+</div>
+</div>
+</footer>
+</body>
 </html>
-
-<style>
-  footer {
-    padding: 40px 24px;
-    text-align: center;
-  }
-  footer p {
-    font-size: 0.82rem;
-  }
-</style>

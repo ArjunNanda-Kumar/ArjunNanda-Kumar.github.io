@@ -1,62 +1,23 @@
 ---
-const currentPath = Astro.url.pathname;
-
 const links = [
-  { href: "/#work", label: "Work" },
-  { href: "/#venture", label: "Venture" },
-  { href: "/#pointcloud", label: "Point Cloud" },
-  { href: "/#contact", label: "Contact" },
+{ href: '/#work', label: '01. Work' },
+{ href: '/#venture', label: '02. Venture' },
+{ href: '/#pointcloud', label: '03. Point Cloud' },
+{ href: '/#listings', label: '04. Listings' },
+{ href: '/#contact', label: '05. Contact' },
 ];
 ---
-
-<header class="nav-wrap">
-  <div class="container nav-inner">
-    <a href="/" class="brand">Arjun Nanda Kumar</a>
-    <nav>
-      {links.map((link) => (
-        <a href={link.href}>{link.label}</a>
-      ))}
-    </nav>
-  </div>
+<header class="nav-header">
+<div class="container nav-inner">
+<a href="/" class="brand">
+<span class="brand-mark"></span>
+<span class="brand-name">ARJUN NANDA KUMAR</span>
+<span class="brand-tag">MS ROBOTICS // UD</span>
+</a>
+<nav class="nav-links" aria-label="Primary Navigation">
+{links.map((link) => (
+<a href={link.href} class="nav-link">{link.label}</a>
+))}
+</nav>
+</div>
 </header>
-
-<style>
-  .nav-wrap {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    backdrop-filter: blur(12px);
-    background: rgba(8, 9, 11, 0.7);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-
-  .brand {
-    font-weight: 650;
-    text-decoration: none;
-    font-size: 1rem;
-  }
-
-  nav {
-    display: flex;
-    gap: 28px;
-  }
-
-  nav a {
-    text-decoration: none;
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    transition: color 0.2s ease;
-  }
-
-  nav a:hover {
-    color: var(--accent);
-  }
-</style>

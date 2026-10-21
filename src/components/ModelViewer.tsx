@@ -1,6 +1,6 @@
 import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stage, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 
 interface ModelViewerProps {
   /** Path to a .glb or .gltf file, e.g. "/models/point-cloud-scan.glb" */
@@ -56,15 +56,20 @@ export default function ModelViewer({ src, height = 480 }: ModelViewerProps) {
   }
 
   return (
-    <div style={{ height, borderRadius: 12, overflow: "hidden", border: "1px solid var(--border)" }}>
+    <div
+      style={{
+        height,
+        borderRadius: 12,
+        overflow: "hidden",
+        border: "1px solid var(--border)",
+      }}
+    >
       <Canvas
-        camera={{ position: [1.3, 0.85, 1.3], fov: 38 }}
+        camera={{ position: [2.3, 1.45, 2.3], fov: 38 }}
         onError={() => setFailed(true)}
       >
         <Suspense fallback={<Loader />}>
-          <Stage environment="city" intensity={0.6}>
-            <Model src={src} />
-          </Stage>
+          <Model src={src} />
         </Suspense>
         <OrbitControls autoRotate autoRotateSpeed={0.6} enableZoom enablePan />
       </Canvas>
