@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Reveal from '../components/Reveal';
 import ModelViewer from '../components/ModelViewer';
-import HeroAvatar3D from '../components/HeroAvatar3D';
+import CartoonAvatar from '../components/CartoonAvatar';
 const work = [
 {
 index: 'SYS-01',
@@ -99,7 +99,7 @@ I’m <strong>Arjun Nanda Kumar</strong>, a Robotics master’s student (MSME pr
 </div>
 <div class="hero-visual">
 <Reveal client:load delay={0.15}>
-<HeroAvatar3D client:load imageSrc="/images/profile.png" />
+<CartoonAvatar client:load />
 </Reveal>
 </div>
 </div>
@@ -249,10 +249,10 @@ FIG 02 // LIDAR POINT CLOUD VISUALIZATION
 <Reveal client:visible>
 <div class="section-header">
 <div>
-<p class="eyebrow">05 // VERIFIED AFFILIATIONS</p>
-<h2 class="section-title">Where I’m Listed</h2>
+<p class="eyebrow">05 // AFFILIATIONS</p>
+<h2 class="section-title">Find Me Across UD</h2>
 </div>
-<span class="section-meta mono-dim">OFFICIAL UNIVERSITY & LAB PAGES</span>
+<span class="section-meta mono-dim">DEPARTMENT · LABS · VENTURE</span>
 </div>
 </Reveal>
 <div class="listings-grid">
